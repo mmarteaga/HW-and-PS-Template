@@ -1,0 +1,51 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% "The Box" - HW & Problem Set Template
+% Author: Mardoqueo Arteaga
+% Fordham University, Fall 2020.
+% v3.0, updated from Fall 2018.
+%
+% This template makes usage of the \input command for a more direct user experience per content items
+%
+% Known issues:
+%   - \underbar has changed warning line
+%   - Disregard negative labelwidth warning
+% 
+% Requires: 
+%   - options.sty, included.
+%
+% Last updated: October 3, 2020. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Preamble
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[10pt]{article}     
+\usepackage{options}   % invokes the options.sty package -- see package for more details
+\pgfplotsset{compat=1.16}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Main Document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\thispagestyle{plain} % no head/foot
+\thebox{Title}{Date}{Course Number}{Instructor}
+
+\input{content/q1}
+
+%\input{content/q2}
+
+\newpage
+
+\input{content/code}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OPTIONAL BIBLIGRAPHY USING APACITE
+% Note: Here I am using the apacite package (included in the options.sty), as well as a filler bibliography "library"; ensure bib is in the same path as the rest of document
+
+%\bibliographystyle{apacite}
+%\bibliography{library} 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document}

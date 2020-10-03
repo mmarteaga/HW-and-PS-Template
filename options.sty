@@ -1,0 +1,171 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% "The Box" Options Package
+% Author: Mardoqueo Arteaga
+% Fordham University, Fall 2020.
+% v3.0, updated from Fall 2018.
+%
+% For usage with "The Box" template
+%
+% Last updated: October 3, 2020. 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Default Packages
+% (not all required, but useful)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amssymb, amsmath, amsfonts, eurosym, graphicx, caption, setspace, sectsty, comment, footmisc, pdflscape, subfigure, array, multicol, hyperref, textgreek, lmodern, listings, dcolumn, enumitem, cprotect, soul, calc, pgfplots, float, ragged2e, apacite, mathtools, titlesec, lipsum, fancyhdr, verbatim, color}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% The Box
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Defines Actual Box
+\newcommand{\boxeditor}[5]{
+	\noindent
+	\begin{center}
+		\framebox{
+			\vbox{
+				\hbox to 0.95\textwidth { {\bf Author } \hfill #2}
+				\vspace{3mm}
+				\hbox to 0.95\textwidth { {\Large \hfill \sc{#5}  \hfill} }
+				\vspace{3mm}
+				\hbox to 0.95\textwidth { {\em #3 \hfill #4}}
+			}
+		}
+	\end{center}
+	\vspace*{8mm}
+}
+
+%%% Defines the Printed Box
+\newcommand{\thebox}[4]{\boxeditor{#1}{#2}{#3}{#4}{#1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document Setup
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Font
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+%%% Paragraph formatting
+\renewcommand{\baselinestretch}{1.1}    % Allow paragraphs to breathe by spreading the lines further; also prevents the text from looking too squished together
+\setlength{\parskip}{0pt}   % Fixes space between paragraphs (i.e. disable variable parskip); takes away paragraph cushion
+\setlength{\parindent}{0em} %Uniformly fixes the indentation of new paragraphs
+\frenchspacing % no double spaces after period
+\sloppy
+
+%%%% Reduce widows (the last line of a paragraph at the start of a page) and orphans (the first line of paragraph at the end of a page) by setting high penalties - meaning it will do this less, or not at all, given a high penalty
+\widowpenalty=10000
+\clubpenalty=10000
+
+%%%% Page size
+\usepackage[
+    top=1.25in,
+    bottom=1.25in,
+    left=1in,
+    right=1in]
+    {geometry}
+
+%%% Headers and Footers
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\headrulewidth}{1pt}
+\lhead{Left Header}
+\rhead{Right Header}
+% \chead{} for centered header
+\cfoot{\thepage}
+% \lfoot, \rfoot for the same
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Color Setup
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\hypersetup{
+	colorlinks = false,       
+	linkbordercolor=cyan,          
+	citebordercolor=cyan,       
+	filebordercolor=magenta,     
+	urlbordercolor=green,
+}
+
+% Colors for the code section
+\definecolor{mygreen}{RGB}{34,205,50}
+\definecolor{mylilas}{RGB}{170,55,241}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Useful Math Commands (not required)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\eps}{\varepsilon}
+\newcommand{\inprod}[1]{\left\langle #1 \right\rangle}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\E}{\text{E}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Code Inputs Setup 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% Package for layout (print defined)
+\usepackage{accsupp}% http://ctan.org/pkg/accsupp
+\newcommand{\emptyaccsupp}[1]{\BeginAccSupp{ActualText={}}#1\EndAccSupp{}}
+
+%%% Defining the layout for numbers (as in code lines), as well as when we do not want code lines to appear
+\lstdefinestyle{numbers}{
+    numbers=left, 
+    stepnumber=1, 
+    numberstyle=\tiny\emptyaccsupp,
+    xleftmargin=2em,
+}
+\lstdefinestyle{nonumbers}{
+    numbers=none,
+}
+
+%%% Defining the Language (I will use Matlab as an example)
+\lstdefinelanguage{Matlab}{
+    % Define all the keywords for formatting; add in your own for first group of keywords, sections [2]-[5] added a few generally used; change colors in the definestyle editor section below
+    morekeywords=,
+    morekeywords=[2]{var, replace},
+    morekeywords=[3]{reg, summarize, display, iebaltab, cluster, bysort},
+    morekeywords=[4]{forvalues, if, foreach, set, function},
+    morekeywords=[5]{rnormal, runiform, for, end},
+    % Comment styles
+    morecomment=[l]{//},
+    morecomment=[l]{\%}, 
+    morecomment=[s]{/*}{*/},
+    % morecomment=[s]{,}{//}, possible comment, not required
+    morecomment=[n][keywordstyle9]{`}{'},
+    morestring=[b]",
+    sensitive=true,
+}
+
+%%% Formatting colors and structure for when the language is used (Matlab-plain and Matlab-editor). The former is basic without coloring, the latter will appear as if from an editor
+\lstdefinestyle{Matlab-plain}{
+    language=Matlab,
+    backgroundcolor={\color{white!97!black}},
+    basicstyle=\footnotesize\ttfamily,
+}
+
+\lstdefinestyle{Matlab-editor}{
+    language=Matlab,
+    backgroundcolor={\color{white!97!black}},
+    % size of the fonts for the code
+    basicstyle=\footnotesize\ttfamily,  
+    keywordstyle={\color{blue}},  
+    keywordstyle=[2]{\color{mylilas}},
+    keywordstyle=[3]{\color{blue}},
+    keywordstyle=[4]{\color{blue}},
+    keywordstyle=[5]{\color{blue}},
+    keywordstyle=[9]{\color{black}},
+    stringstyle=\color{orange},
+    commentstyle=\color{mygreen},
+}
+
+%%% The actual code set up that will print (using the editor style and the numbers)
+\lstset{language=Matlab,
+    style=Matlab-editor,
+    % style=Matlab-plain, another option using the above
+    style=numbers,
+    % style=nonumbers
+    showstringspaces=false,
+    breaklines,
+}
